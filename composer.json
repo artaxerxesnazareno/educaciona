@@ -1,0 +1,15 @@
+{
+    "name": "artaxerxes/educaciona",
+    "autoload": {
+        "psr-4": {
+            "Artaxerxes\\Educaciona\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Artaxerxes Nazareno",
+            "email": "artaxerxesnazare@hotmail.com"
+        }
+    ],
+    "require": {}
+}
