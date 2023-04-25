@@ -2,8 +2,7 @@
     "name": "artaxerxes/educaciona",
     "autoload": {
         "psr-4": {
-            "Artaxerxes\\Educaciona\\": "src/"
-        }
+            "Artaxerxes\\Educaciona\\": "src/"        }
     },
     "authors": [
         {
@@ -11,5 +10,11 @@
             "email": "artaxerxesnazare@hotmail.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "phpunit/phpunit": "^10.1"
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.5",
+        "ircmaxell/password-compat": "^1.0"
+    }
 }
