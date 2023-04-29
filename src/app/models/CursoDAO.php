@@ -77,12 +77,12 @@ static public  function getCurso($id)
         return $cursos;
     }
 
-    static public function getTotalMatriculas($id){
+    static public function getTotalInscritos($id){
         $conn = Conexao::getInstance();
-        $sql = "select count(*) as total_matriculas from matriculas where curso_id = $id ";
+        $sql = "select count(*) as total_inscritos from inscritos where curso_id = $id ";
         $result = mysqli_query($conn, $sql);
         $row = $result->fetch_assoc();
 
-        return $row['total_matriculas'];
+        return $row['total_inscritos'];
     }
 }
