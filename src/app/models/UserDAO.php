@@ -25,11 +25,14 @@ class UserDAO
       $result = mysqli_query($conn, $query);
   }
 
-  public static function getUserByEmailAndPassword($email, $password){
+    static public function getUserByEmailAndPassword($email, $password)
+    {
         $conn = Conexao::getInstance();
         $query = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
         $result = mysqli_query($conn, $query);
-        $user = mysqli_fetch_assoc($result);
+        $row = $result->fetch_assoc();
+        $user = new User($row['name'],$row['email'],$row['password'] );
+       $user->setId($row['id']);
         return $user;
   }
 }
