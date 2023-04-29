@@ -8,6 +8,12 @@ class Curso
     private $nome;
     private $descricao;
 
+    private $nivel;
+
+    private $capa;
+
+    private $categoria;
+
 
     /**
      * @var Aula[]
@@ -25,6 +31,56 @@ class Curso
     {
         $this->nome = $nome;
         $this->descricao = $descricao;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * @param mixed $categoria
+     */
+    public function setCategoria($categoria): void
+    {
+        $this->categoria = $categoria;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCapa()
+    {
+        return $this->capa;
+    }
+
+    /**
+     * @param mixed $capa
+     */
+    public function setCapa($capa): void
+    {
+        $this->capa = $capa;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getNivel()
+    {
+        return $this->nivel;
+    }
+
+    /**
+     * @param mixed $nivel
+     */
+    public function setNivel($nivel): void
+    {
+        $this->nivel = $nivel;
     }
 
     /**
@@ -99,6 +155,14 @@ class Curso
         return $this->id;
     }
 
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
     public function addAula(Aula $aula)
     {
         $this->aulas [] = $aula;
@@ -113,4 +177,6 @@ class Curso
     {
       return  $this->aulas[0];
     }
+
+
 }

@@ -35,9 +35,9 @@ https://templatemo.com/tm-579-cyborg-gaming
 <?php
 use Artaxerxes\Educaciona\app\models\CursoDAO;
 require '../../../autoloader.php';
-
-$curso = CursoDAO::getCursosAllAula(1);
-
+$id = $_GET['id'];
+$first_class = CursoDAO::getCursosAllAula($id);
+$curso = CursoDAO::getCurso($id);
 
 ?>
   <!-- ***** Preloader Start ***** -->
@@ -60,7 +60,7 @@ $curso = CursoDAO::getCursosAllAula(1);
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
+                    <a href="index.php" class="logo">
                         <img src="../assets/images/logo.png" alt="">
                     </a>
                     <!-- ***** Logo End ***** -->
@@ -74,7 +74,7 @@ $curso = CursoDAO::getCursosAllAula(1);
                     <!-- ***** Search End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li><a href="browse.html">Browse</a></li>
                         <li><a href="details.html" class="active">Details</a></li>
                         <li><a href="streams.html">Streams</a></li>
@@ -102,14 +102,16 @@ $curso = CursoDAO::getCursosAllAula(1);
               <div class="feature-banner header-text">
                 <div class="row">
                   <div class="col-lg-4">
-                    <img src="../assets/images/feature-left.jpg" alt="" style="border-radius: 23px;">
+                      <?php
+                    echo '<img src="../assets/images/'.$curso->getCapa().'" alt="" style="border-radius: 23px;">';
+                    ?>
                   </div>
                   <div class="col-lg-8">
                     <div class="thumb">
                         <div class="video-container">
                             <!-- código de incorporação do YouTube aqui -->
                             <?php
-                            $c =$curso->getFirstAula();
+                            $c =$first_class->getFirstAula();
                             echo $c->getLink();
                             ?>
                         </div>
@@ -128,7 +130,9 @@ $curso = CursoDAO::getCursosAllAula(1);
           <div class="game-details">
             <div class="row">
               <div class="col-lg-12">
-                <h2>Fortnite Details</h2>
+                  <?php
+                echo '<h2> Curso de '.$curso->getNome().' Detalhes</h2>';
+                ?>
               </div>
               <div class="col-lg-12">
                 <div class="content">
@@ -136,13 +140,15 @@ $curso = CursoDAO::getCursosAllAula(1);
                     <div class="col-lg-6">
                       <div class="left-info">
                         <div class="left">
-                          <h4>Fortnite</h4>
-                          <span>Sandbox</span>
+                       <?php
+                          echo '<h4>'.$curso->getNome().'</h4>
+                          <span>'.$curso->getNivel().'</span>
                         </div>
                         <ul>
                           <li><i class="fa fa-star"></i> 4.8</li>
-                          <li><i class="fa fa-download"></i> 2.3M</li>
-                        </ul>
+                          <li><i class="fa fa-download"></i>  '.CursoDAO::getTotalMatriculas($curso->getId()).'</li>
+                        </ul>';
+                          ?>
                       </div>
                     </div>
                     <div class="col-lg-6">
@@ -150,8 +156,8 @@ $curso = CursoDAO::getCursosAllAula(1);
                         <ul>
                           <li><i class="fa fa-star"></i> 4.8</li>
                           <li><i class="fa fa-download"></i> 2.3M</li>
-                          <li><i class="fa fa-server"></i> 36GB</li>
-                          <li><i class="fa fa-gamepad"></i> Action</li>
+                          <li><i class="fa fa-video-camera" aria-hidden="true"></i> Nº Aulas</li>
+                          <li><i class="fa fa-crosshairs" aria-hidden="true"></i> Categoria</li>
                         </ul>
                       </div>
                     </div>

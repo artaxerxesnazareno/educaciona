@@ -31,6 +31,13 @@ https://templatemo.com/tm-579-cyborg-gaming
 </head>
 
 <body>
+<?php
+use Artaxerxes\Educaciona\app\models\CursoDAO;
+require '../../../autoloader.php';
+
+    $cursos = CursoDAO::getCursosAll();
+
+?>
 
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
@@ -113,17 +120,24 @@ https://templatemo.com/tm-579-cyborg-gaming
                   <h4><em>Mais Populares</em> Agora </h4>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3 col-sm-6">
+                    <?php
+                    foreach($cursos as $curso) {
+                        echo '<div class="col - lg - 3 col - sm - 6">
+                    <a href="details.php?id='.$curso->getId().'">
                     <div class="item">
-                      <img src="../assets/images/popular-01.jpg" alt="">
-                      <h4>Java<br><span>Basico</span></h4>
+                      <img src="../assets/images/capas/'.$curso->getCapa().'" alt="">
+                      <h4>'.$curso->getNome().'<br><span>'.$curso->getNivel().'</span></h4>
                       <ul>
                         <li><i class="fa fa-star"></i>4.8</li>
-                        <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> 2.3M</li>
+                        <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> '.CursoDAO::getTotalMatriculas($curso->getId()).'</li>
                       </ul>
                     </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
+                    </a>
+                  </div>';
+                    }
+                    ?>
+
+                  <!--<div class="col-lg-3 col-sm-6">
                     <div class="item">
                       <img src="../assets/images/popular-02.jpg" alt="">
                       <h4>HTML5 & CSS3<br><span>Intermediario</span></h4>
@@ -140,7 +154,8 @@ https://templatemo.com/tm-579-cyborg-gaming
                       <ul>
                         <li><i class="fa fa-star"></i> 4.8</li>
 
-                      <!-- esse icone vai representar o nº de pessoas formadas ou de alunos inscritos-->
+                     esse icone vai representar o nº de pessoas formadas ou de alunos inscritos
+
                         <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> 2.3M</li>
                       </ul>
                     </div>
@@ -154,7 +169,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                         <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> 2.3M</li>
                       </ul>
                     </div>
-                  </div>
+                  </div>-->
                   
                   
                   <div class="col-lg-12">

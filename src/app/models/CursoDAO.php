@@ -25,7 +25,10 @@ static public  function getCurso($id)
 
 
         $curso = new Curso($row["name"], $row["descricao"]);
-
+        $curso->setId($row["id"]);
+        $curso->setNivel($row['nivel']);
+        $curso->setCapa($row['imagen_capa']);
+        $curso->setCategoria($row['categoria']);
 
         return $curso;
 
@@ -53,5 +56,33 @@ static public  function getCurso($id)
         }
         return $curso;
 
+    }
+
+    static public  function getCursosAll(){
+        $conn = Conexao::getInstance();
+        $sql = "select * from cursos";
+        $result = mysqli_query($conn, $sql);
+        $cursos = [];
+
+        if ($result) {
+            foreach ($result as $row) {
+                $curso = new Curso($row["name"], $row["descricao"]);
+                $curso->setId($row["id"]);
+                $curso->setNivel($row['nivel']);
+                $curso->setCapa($row['imagen_capa']);
+                $curso->setCategoria($row['categoria']);
+                $cursos[] = $curso;
+            }
+        }
+        return $cursos;
+    }
+
+    static public function getTotalMatriculas($id){
+        $conn = Conexao::getInstance();
+        $sql = "select count(*) as total_matriculas from matriculas where curso_id = $id ";
+        $result = mysqli_query($conn, $sql);
+        $row = $result->fetch_assoc();
+
+        return $row['total_matriculas'];
     }
 }
