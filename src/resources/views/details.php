@@ -146,7 +146,7 @@ $curso = CursoDAO::getCurso($id);
                         </div>
                         <ul>
                           <li><i class="fa fa-star"></i> 4.8</li>
-                          <li><i class="fa fa-download"></i>  '.CursoDAO::getTotalMatriculas($curso->getId()).'</li>
+                          <li><i class="fa fa-download"></i>  '.CursoDAO::getTotalInscritos($curso->getId()).'</li>
                         </ul>';
                           ?>
                       </div>

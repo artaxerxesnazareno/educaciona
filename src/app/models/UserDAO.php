@@ -34,5 +34,35 @@ class UserDAO
         $user = new User($row['name'],$row['email'],$row['password'] );
        $user->setId($row['id']);
         return $user;
-  }
+    }
+
+    public static function userIsInscrio($id_user, $id_cuso)
+    {
+        $conn = Conexao::getInstance();
+        $query = "select *from inscritos where curso_id = '$id_cuso 'AND  '$id_user' = '$id_user'";
+        $result = mysqli_query($conn, $query);
+        $row = $result->fetch_assoc();
+        if ($row) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function inscrever($id_user, $id_curso)
+    {
+        $conn = Conexao::getInstance();
+
+        try {
+            $query = "insert into inscritos(user_id, curso_id) values ('$id_user','$id_curso')";
+            $result = mysqli_query($conn, $query);
+        } catch (mysqli_sql_exception $e) {
+            if ($e->getCode() == 23000) {
+                echo "<script>
+           alert('Você já esta incrito nesse  cusr');
+          </script>";
+            }
+        }
+    }
+
 }

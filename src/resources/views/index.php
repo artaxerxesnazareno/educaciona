@@ -129,7 +129,7 @@ require '../../../autoloader.php';
                       <h4>'.$curso->getNome().'<br><span>'.$curso->getNivel().'</span></h4>
                       <ul>
                         <li><i class="fa fa-star"></i>4.8</li>
-                        <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> '.CursoDAO::getTotalMatriculas($curso->getId()).'</li>
+                        <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> '.CursoDAO::getTotalInscritos($curso->getId()).'</li>
                       </ul>
                     </div>
                     </a>
@@ -137,39 +137,6 @@ require '../../../autoloader.php';
                     }
                     ?>
 
-                  <!--<div class="col-lg-3 col-sm-6">
-                    <div class="item">
-                      <img src="../assets/images/popular-02.jpg" alt="">
-                      <h4>HTML5 & CSS3<br><span>Intermediario</span></h4>
-                      <ul>
-                        <li><i class="fa fa-star"></i> 4.8</li>
-                        <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> 2.3M</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                    <div class="item">
-                      <img src="../assets/images/popular-03.jpg" alt="">
-                      <h4>JavaScript<br><span>Basico</span></h4>
-                      <ul>
-                        <li><i class="fa fa-star"></i> 4.8</li>
-
-                     esse icone vai representar o nº de pessoas formadas ou de alunos inscritos
-
-                        <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> 2.3M</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-sm-6">
-                    <div class="item">
-                      <img src="../assets/images/popular-04.jpg" alt="">
-                      <h4>Python<br><span>Avançado</span></h4>
-                      <ul>
-                        <li><i class="fa fa-star"></i> 4.8</li>
-                        <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> 2.3M</li>
-                      </ul>
-                    </div>
-                  </div>-->
                   
                   
                   <div class="col-lg-12">
