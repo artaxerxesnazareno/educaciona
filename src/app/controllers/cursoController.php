@@ -94,6 +94,19 @@ function cadastrarAula()
         exit();
     }
 }
+function deletarAula($aula_id)
+{
+    $curso_id = $_GET['curso_id'];
+    $result = CursoDAO::deleteAula($aula_id);
+
+    if ($result) {
+        header("Location: ../../resources/views/dashboard/lista_aulas.php?curso_id=$curso_id");
+        exit();
+    } else {
+        echo "Erro ao excluir a aula.";
+    }
+}
+
 
 //      Chamada da função
 if (isset($_GET['aula'])) {
@@ -107,6 +120,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['deletarCurso'])) {
 }
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['cadastrarAula'])) {
     cadastrarAula();
+}
+if (isset($_GET['deletarAula'])) {
+    deletarAula($_GET['deletarAula']);
 }
 
 ?>

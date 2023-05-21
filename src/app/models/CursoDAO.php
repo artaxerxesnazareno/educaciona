@@ -210,4 +210,17 @@ class CursoDAO
         $result = mysqli_query($conn, $sql);
     }
 
+    public static function deleteAula($aula_id)
+    {
+        $conn = Conexao::getInstance();
+
+        // Crie a consulta SQL para excluir a aula
+        $sql = "DELETE FROM aulas WHERE id = $aula_id";
+
+        // Execute a consulta SQL
+        $result = mysqli_query($conn, $sql);
+
+        return $result;
+    }
+
 }

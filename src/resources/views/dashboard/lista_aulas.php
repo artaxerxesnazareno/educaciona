@@ -313,13 +313,13 @@ $aulas = $curso->getAulas();
                     <div class="container">
                         <h2>Aulas de <?php echo $curso->getNome(); ?></h2>
                         <img src="../../assets/images/capas/<?php echo $curso->getCapa(); ?>" alt="Capa do curso"
-                             width="200">
+                             width="400">
                         <div class="table-responsive table-responsive-data2 ">
                             <table class="table table-data2 table-striped ">
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th style="width: 300px;">Link</th>
+                                    <th style="width: 300px;">Aula</th>
                                     <th>Ações</th>
                                 </tr>
                                 </thead>
@@ -331,10 +331,11 @@ $aulas = $curso->getAulas();
                                     echo '<td><div class="responsive-iframe">' . $aula->getLink() . '</div></td>';
                                     echo '<td>';
                                     echo '<div class="table-data-feature">';
-                                    echo '<a href="editar_aula.php?aula_id=' . $aula->getId() . '" class="item" data-toggle="tooltip" data-placement="top" title="Editar">';
+                                    echo '<a href="editar_aula.php?aula_id=' . htmlspecialchars($aula->getId()) . '" class="item" data-toggle="tooltip" data-placement="top" title="Editar">';
                                     echo '<i class="zmdi zmdi-edit"></i>';
                                     echo '</a>';
-                                    echo '<a href="../../../app/controllers/cursoController.php?deletarAula&id=' . $aula->getId() . '" class="item text-danger" data-toggle="tooltip" data-placement="top" title="Deletar" onclick="return confirm(\'Tem certeza que deseja excluir esta aula?\');">';
+                                    // Adicione o símbolo '=' após 'deletarAula'
+                                    echo '<a href="../../../app/controllers/cursoController.php?deletarAula=' . $aula->getId() . '&curso_id='.$curso_id.'" class="item text-danger" data-toggle="tooltip" data-placement="top" title="Deletar" onclick="return confirm(\'Tem certeza que deseja excluir esta aula?\');">';
                                     echo '<i class="zmdi zmdi-delete text-danger"></i>';
                                     echo '</a>';
                                     echo '</div>';
@@ -343,6 +344,7 @@ $aulas = $curso->getAulas();
                                 }
                                 ?>
                                 </tbody>
+
                             </table></div>
                     </div>
                 </div>
