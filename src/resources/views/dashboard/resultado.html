@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const result = urlParams.get('result');
+            const message = urlParams.get('message');
+
+            if (result === 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso',
+                    text: 'Upload e armazenamento bem-sucedidos!'
+                }).then(() => {
+                    window.location.href = 'home.html';
+                });
+            } else if (result === 'error' && message) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: decodeURIComponent(message)
+                }).then(() => {
+                    window.location.href = 'cadastrarCurso.html';
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Conteúdo da página de resultado aqui -->
+</body>
+</html>
