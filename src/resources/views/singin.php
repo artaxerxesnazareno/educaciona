@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@ if ($id == 'erro'){
                         <input type="email" class="form-input" name="email" id="email" placeholder="Seu Email"/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" name="password" id="password" placeholder="Senha"/>
+                        <input type="password" class="form-input" name="password" id="password" placeholder="Senha"/>
                         <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                     </div>
 

@@ -1,8 +1,8 @@
 <?php
 //$user = unserialize($_SESSION['user']);
-
+session_start();
 if (isset($_SESSION['user'])) {
-    header('Location: educaciona/resources/views/index.php');
+    header('Location: ./src/resources/views/index.php');
 }else{
-    header('Location: ./resources/views/singin.php');
+    header('Location: ./src/resources/views/singin.php');
 }

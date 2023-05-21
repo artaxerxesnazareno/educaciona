@@ -362,6 +362,11 @@ require '../../../../autoloader.php';
                                             echo '<i class="zmdi zmdi-edit"></i>';
                                             echo '</button>';
 
+// Botão "Adicionar aula" com a URL de cadastro da aula
+                                            echo '<a href="cadastro_aula.php?curso_id=' . $curso->getId() . '" class="item" data-toggle="tooltip" data-placement="top" title="Adicionar aula">';
+                                            echo '<i class="zmdi zmdi-plus text-success"></i>';
+                                            echo '</a>';
+
                                             // Botão "Delete" atualizado com a URL de deletar curso e cor vermelha
                                             echo '<a href="../../../app/controllers/cursoController.php?deletarCurso&id=' . $curso->getId() . '" class="item text-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return confirm(\'Tem certeza que deseja excluir este curso?\');">';
                                             echo '<i class="zmdi zmdi-delete text-danger"></i>';

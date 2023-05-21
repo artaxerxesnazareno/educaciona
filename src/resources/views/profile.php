@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
   <head>
 
@@ -69,7 +69,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                         <li><a href="index.php">Home</a></li>
                         <li><a href="browse.html">Browse</a></li>
                         <li><a href="details.php">Details</a></li>
-                        <li><a href="streams.html">Streams</a></li>
+                        <li><a href="cursos.php">Streams</a></li>
                         <li><a href="profile.html" class="active">Profile <img src="../assets/images/profile-header.jpg" alt=""></a></li>
                     </ul>   
                     <a class='menu-trigger'>

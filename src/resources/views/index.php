@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
 
@@ -34,8 +34,16 @@ https://templatemo.com/tm-579-cyborg-gaming
 <?php
 use Artaxerxes\Educaciona\app\models\CursoDAO;
 require '../../../autoloader.php';
+session_start();
+$user_id =null;
+if (!isset($_SESSION['user_id'])) {
+    header('Location: singin.php');
 
-    $cursos = CursoDAO::getCursosAll();
+}else{
+    $user_id = $_SESSION['user_id'];
+}
+/*
+    $cursos = CursoDAO::getCursosAll();*/
 
 ?>
 
@@ -74,10 +82,8 @@ require '../../../autoloader.php';
             <!-- ***** Search End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li><a href="index.html" class="active">Home</a></li>
-              <li><a href="browse.html">Cursos</a></li>
-              <li><a href="details.php">Detalhes</a></li>
-              <li><a href="streams.html">Streams</a></li>
+              <li><a href="index.php" class="active">Home</a></li>
+              <li><a href="cursos.php">Cursos</a></li>
               <li><a href="profile.php">Perfiel <img src="../assets/images/profile-header.jpg" alt=""></a></li>
             </ul>
             <a class='menu-trigger'>
@@ -104,7 +110,7 @@ require '../../../autoloader.php';
                   <h6>Bem-Vindo ao Educaciona</h6>
                   <h4><em>Embarque</em> Em Uma jornada de conhecimento e crescimento</h4>
                   <div class="main-button">
-                    <a href="browse.html">Embarque Agora</a>
+                    <a href="./cursos.php">Embarque Agora</a>
                   </div>
                 </div>
               </div>
@@ -121,8 +127,8 @@ require '../../../autoloader.php';
                 </div>
                 <div class="row">
                     <?php
-                    foreach($cursos as $curso) {
-                        echo '<div class="col - lg - 3 col - sm - 6">
+                 /*   foreach($cursos as $curso) {
+                        echo '<div class="col-lg-3 col-sm-6">
                     <a href="details.php?id='.$curso->getId().'">
                     <div class="item">
                       <img src="../assets/images/capas/'.$curso->getCapa().'" alt="">
@@ -134,14 +140,14 @@ require '../../../autoloader.php';
                     </div>
                     </a>
                   </div>';
-                    }
+                    }*/
                     ?>
 
                   
                   
                   <div class="col-lg-12">
                     <div class="main-button">
-                      <a href="browse.html">Descubra os Populares</a>
+                      <a href="./cursos.php">Descubra os Populares</a>
                     </div>
                   </div>
                 </div>
@@ -157,46 +163,30 @@ require '../../../autoloader.php';
                 <h4><em>Minha Biblioteca</em> Cursos</h4>
                 <!-- Essa area so estara visivel caso o aluno ja tenha se inscrevido em algum curso, verificar aparitir de uma global ou de um regitro do banco-->
               </div>
-              <div class="item">
+                <?php
+                $cursos_ = CursoDAO::getCursosByUserId(5);
+                foreach($cursos_ as $curso) {
+                    echo '<div class="item text-center">
                 <ul>
-                  <li><img src="../assets/images/popular-01.jpg" alt="" class="templatemo-item"></li>
+                  <li><img src="../assets/images/capas/' . $curso->getCapa().'" alt="" class="templatemo-item"></li>
                   <li>
-                    <h4>Java</h4><span>Basico</span>
+                    <h4>' . $curso->getNome().'</h4><span>' . $curso->getNivel().'</span>
                   </li>
                   <li>
                     <h4>Data de Inicio</h4><span>24/01/2023</span>
                   </li>
                   <li>
-                    <h4>Horas de Estudo</h4><span>634 H 22 Mins</span>
-                  </li>
-                  <li>
                     <h4>Estado</h4><span>Completo</span>
                   </li>
                   <li>
-                    <div class="main-border-button border-no-active"><a href="#">Ver Curso</a></div>
+                    <div class="main-border-button border-no-active">
+                    <a href="./curso.php?id=' . $curso->getId() . '">Ver Curso</a>
                   </li>
                 </ul>
-              </div>
-              <div class="item">
-                <ul>
-                  <li><img src="../assets/images/popular-02.jpg" alt="" class="templatemo-item"></li>
-                  <li>
-                    <h4>HTML5 & CSS3 </h4><span>INTERMEDIARIO</span>
-                  </li>
-                  <li>
-                    <h4>Data de Inicio</h4><span>22/06/2036</span>
-                  </li>
-                  <li>
-                    <h4>Horas Estudadas</h4><span>740 H 52 Mins</span>
-                  </li>
-                  <li>
-                    <h4>Status</h4><span>Encurso</span>
-                  </li>
-                  <li>
-                    <div class="main-border-button"><a href="#">Ver Curso</a></div>
-                  </li>
-                </ul>
-              </div>
+              </div>';
+                }
+                ?>
+
               
             </div>
             <div class="col-lg-12">

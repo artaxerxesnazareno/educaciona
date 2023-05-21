@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
   <head>
 
@@ -33,10 +33,13 @@ https://templatemo.com/tm-579-cyborg-gaming
 
 <body>
 <?php
+session_start();
+
 use Artaxerxes\Educaciona\app\models\CursoDAO;
+use Artaxerxes\Educaciona\app\models\UserDAO;
 require '../../../autoloader.php';
 $id = $_GET['id'];
-$first_class = CursoDAO::getCursosAllAula($id);
+$firstClass = CursoDAO::getCursosAllAula($id);
 $curso = CursoDAO::getCurso($id);
 
 ?>
@@ -75,9 +78,7 @@ $curso = CursoDAO::getCurso($id);
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="browse.html">Browse</a></li>
-                        <li><a href="details.html" class="active">Details</a></li>
-                        <li><a href="streams.html">Streams</a></li>
+                        <li><a href="cursos.php">Cursos</a></li>
                         <li><a href="profile.php">Profile <img src="../assets/images/profile-header.jpg" alt=""></a></li>
                     </ul>   
                     <a class='menu-trigger'>
@@ -103,7 +104,7 @@ $curso = CursoDAO::getCurso($id);
                 <div class="row">
                   <div class="col-lg-4">
                       <?php
-                    echo '<img src="../assets/images/'.$curso->getCapa().'" alt="" style="border-radius: 23px;">';
+                    echo '<img src="../assets/images/capas/'.$curso->getCapa().'" alt="" style="border-radius: 23px;">';
                     ?>
                   </div>
                   <div class="col-lg-8">
@@ -111,7 +112,7 @@ $curso = CursoDAO::getCurso($id);
                         <div class="video-container">
                             <!-- código de incorporação do YouTube aqui -->
                             <?php
-                            $c =$first_class->getFirstAula();
+                            $c =$firstClass->getFirstAula();
                             echo $c->getLink();
                             ?>
                         </div>
@@ -152,30 +153,29 @@ $curso = CursoDAO::getCurso($id);
                       </div>
                     </div>
                     <div class="col-lg-6">
-                      <div class="right-info">
+                   <!--   <div class="right-info">
                         <ul>
                           <li><i class="fa fa-star"></i> 4.8</li>
                           <li><i class="fa fa-download"></i> 2.3M</li>
                           <li><i class="fa fa-video-camera" aria-hidden="true"></i> Nº Aulas</li>
                           <li><i class="fa fa-crosshairs" aria-hidden="true"></i> Categoria</li>
                         </ul>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <img src="../assets/images/details-01.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px;">
-                    </div>
-                    <div class="col-lg-4">
-                      <img src="../assets/images/details-02.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px;">
-                    </div>
-                    <div class="col-lg-4">
-                      <img src="../assets/images/details-03.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px;">
+                      </div>-->
                     </div>
                     <div class="col-lg-12">
-                      <p>Cyborg Gaming is free HTML CSS website template provided by TemplateMo. This is Bootstrap v5.2.0 layout. You can make a <a href="https://paypal.me/templatemo" target="_blank">small contribution via PayPal</a> to info [at] templatemo.com and thank you for supporting. If you want to get the PSD source files, please contact us. Lorem ipsum dolor sit consectetur es dispic dipiscingei elit, sed doers eiusmod lisum hored tempor.</p>
+                     <?php
+                      echo '<p>'.$curso->getDescricao().'</p>';
+                      ?>
                     </div>
                     <div class="col-lg-12">
                       <div class="main-border-button">
-                        <a href="#">Download Fortnite Now!</a>
+                       <?php
+                       if (UserDAO::userIsInscrio($_SESSION['user_id'], $curso->getId())){
+                           echo '<a href="./curso.php?id=' . $curso->getId() . '">Ver Curso</a>';
+                       }else {
+                           echo '<a href="../../app/controllers/userController.php?id=' . $curso->getId() . '">Inscrever-se</a>';
+                       }
+                        ?>
                       </div>
                     </div>
                   </div>
@@ -186,7 +186,7 @@ $curso = CursoDAO::getCurso($id);
           <!-- ***** Details End ***** -->
 
           <!-- ***** Other Start ***** -->
-          <div class="other-games">
+       <!--   <div class="other-games">
             <div class="row">
               <div class="col-lg-12">
                 <div class="heading-section">
@@ -254,7 +254,7 @@ $curso = CursoDAO::getCurso($id);
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
           <!-- ***** Other End ***** -->
 
         </div>

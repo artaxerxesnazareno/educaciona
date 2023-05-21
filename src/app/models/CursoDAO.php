@@ -7,16 +7,16 @@ use Artaxerxes\Educaciona\config\Conexao;
 use Artaxerxes\Educaciona\app\models\Curso;
 use Artaxerxes\Educaciona\app\models\Aula;
 
-require '../../../autoloader.php';
+//require '../../../autoloader.php';
 
 
 class CursoDAO
 {
-static public  function getCurso($id)
+    static public function getCurso($id)
     {
         $conn = Conexao::getInstance();
 
-        $sql = "SELECT * FROM cursos WHERE id = $id";
+        $sql = "select cursos.*,ca.id as categoria_id, ca.nome as categoria_nome from cursos join categorias ca on ca.id = cursos.categoria_id WHERE cursos.id = $id";
 
 
         $result = mysqli_query($conn, $sql);
@@ -28,56 +28,73 @@ static public  function getCurso($id)
         $curso->setId($row["id"]);
         $curso->setNivel($row['nivel']);
         $curso->setCapa($row['imagen_capa']);
-        $curso->setCategoria($row['categoria']);
-
+        $curso->setCategoriaId($row['categoria_id']);
+        $curso->setCategoriaNome($row['categoria_nome']);
+//        $curso->setProgresso(self::progressoCurso($row['id']));
         return $curso;
 
     }
 
-    static public  function getCursosAllAula($id)
+
+    static public function getCursosAllAula($id)
     {
         $conn = Conexao::getInstance();
-        $sql = "select  a.nome as aula_nome, a.link   from cursos c join aulas a where a.curso_id = '$id'";
+        $sql = "select  a.id,a.completada, a.nome as aula_nome, a.link, a.descricao as aula_decricao  from cursos c join aulas a ON c.id = a.curso_id where a.curso_id = '$id'";
 
         $result = mysqli_query($conn, $sql);
 
-        $curso = null;
+        $curso = self::getCurso($id);
+
 
         if ($result) {
             foreach ($result as $row) {
 
-                $curso = self::getCurso($id);
 
                 $aula = new Aula($row['aula_nome'], $row['link']);
-
-                $curso->addAula($aula);
+                $aula->setDescricao($row['aula_decricao']);
+                $aula->setId($row['id']);
+                $aula->setCompletada($row['completada']);
+                $curso->addAula($row['id'], $aula);
 
             }
         }
+
         return $curso;
 
     }
 
-    static public  function getCursosAll(){
-        $conn = Conexao::getInstance();
-        $sql = "select * from cursos";
-        $result = mysqli_query($conn, $sql);
-        $cursos = [];
+    static public function getCursosAll()
+    {
+        try {
 
-        if ($result) {
-            foreach ($result as $row) {
-                $curso = new Curso($row["name"], $row["descricao"]);
-                $curso->setId($row["id"]);
-                $curso->setNivel($row['nivel']);
-                $curso->setCapa($row['imagen_capa']);
-                $curso->setCategoria($row['categoria']);
-                $cursos[] = $curso;
+            $conn = Conexao::getInstance();
+            $sql = "select cursos.*, c.nome as categoria_nome from cursos join categorias c on c.id = cursos.categoria_id";
+            $result = mysqli_query($conn, $sql);
+            $cursos = [];
+
+            if ($result) {
+                foreach ($result as $row) {
+                    $curso = new Curso($row["name"], $row["descricao"]);
+                    $curso->setId($row['id']);
+                    $curso->setNivel($row['nivel']);
+                    $curso->setCapa($row['imagen_capa']);
+                    $curso->setCategoriaId($row['categoria_id']);
+                    $curso->setCategoriaNome($row['categoria_nome']);
+//                    $curso->setProgresso(self::progressoCurso($row['id']));
+                    $cursos[] = $curso;
+                }
             }
+
+
+
+            return $cursos;
+        } catch (mysqli_sql_exception $e) {
+            echo "erro aqui" . print_r($e) . "";
         }
-        return $cursos;
     }
 
-    static public function getTotalInscritos($id){
+    static public function getTotalInscritos($id)
+    {
         $conn = Conexao::getInstance();
         $sql = "select count(*) as total_inscritos from inscritos where curso_id = $id ";
         $result = mysqli_query($conn, $sql);

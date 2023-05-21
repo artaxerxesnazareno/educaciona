@@ -1,11 +1,18 @@
 <?php
 
+require '../../../autoloader.php';
 use Artaxerxes\Educaciona\app\models\CursoDAO;
 
-require '../../../autoloader.php';
 
-$curso = CursoDAO::getCursosAllAula(1);
+//$firstClass = CursoDAO::getCursosAllAula(2);
+$curso = CursoDAO::getCursosAll();
 
-echo "<h1>Cursos</h1>";
-echo CursoDAO::getTotalMatriculas(2);
+//$cursos_ = CursoDAO::getCursosByUserId(5);
+echo "<h1></br>Var_export</h1>";
+echo '<pre>';
+var_export($curso);
+echo '</pre>';
 
+//
+//echo "<h1></br>Json_code</h1>";
+//json_encode(CursoDAO::getTopCursos());

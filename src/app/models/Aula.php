@@ -4,9 +4,13 @@ namespace Artaxerxes\Educaciona\App\models;
 
 class Aula
 {
+    private $id;
  private $nome;
  private $link;
 
+ private $descricao;
+
+ private bool $completada;
     /**
      * @param $nome
      * @param $link
@@ -15,6 +19,38 @@ class Aula
     {
         $this->nome = $nome;
         $this->link = $link;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompletada()
+    {
+        return $this->completada;
+    }
+
+    /**
+     * @param mixed $completada
+     */
+    public function setCompletada($completada): void
+    {
+        $this->completada = $completada;
     }
 
 
@@ -49,6 +85,23 @@ class Aula
     {
         $this->link = $link;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    /**
+     * @param mixed $descricao
+     */
+    public function setDescricao($descricao): void
+    {
+        $this->descricao = $descricao;
+    }
+
 
 
 }

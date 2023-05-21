@@ -8,8 +8,6 @@ class User
     private $name;
     private $email;
     private $password;
-    private $cursos = [];
-
     /**
      * @param $name
      * @param $email
@@ -20,6 +18,16 @@ class User
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
+    }
+
+    private $cursos = [];
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     /**

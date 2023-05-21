@@ -12,8 +12,14 @@ class Curso
 
     private $capa;
 
-    private $categoria;
 
+
+    private $progresso;
+
+    private $data_inicio;
+
+    private $categoria_id;
+    private $categoria_nome;
 
     /**
      * @var Aula[]
@@ -36,18 +42,67 @@ class Curso
     /**
      * @return mixed
      */
-    public function getCategoria()
+    public function getCategoriaNome()
     {
-        return $this->categoria;
+        return $this->categoria_nome;
     }
 
     /**
-     * @param mixed $categoria
+     * @param mixed $categoria_nome
      */
-    public function setCategoria($categoria): void
+    public function setCategoriaNome($categoria_nome): void
     {
-        $this->categoria = $categoria;
+        $this->categoria_nome = $categoria_nome;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoriaId()
+    {
+        return $this->categoria_id;
+    }
+
+    /**
+     * @param mixed $categoria_id
+     */
+    public function setCategoriaId($categoria_id): void
+    {
+        $this->categoria_id = $categoria_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgresso()
+    {
+        return $this->progresso;
+    }
+
+    /**
+     * @param mixed $progresso
+     */
+    public function setProgresso($progresso): void
+    {
+        $this->progresso = $progresso;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDataInicio()
+    {
+        return $this->data_inicio;
+    }
+
+    /**
+     * @param mixed $data_inicio
+     */
+    public function setDataInicio($data_inicio): void
+    {
+        $this->data_inicio = $data_inicio;
+    }
+
 
     /**
      * @return mixed
@@ -120,6 +175,7 @@ class Curso
      */
     public function getAulas(): array
     {
+
         return $this->aulas;
     }
 
@@ -163,9 +219,9 @@ class Curso
         $this->id = $id;
     }
 
-    public function addAula(Aula $aula)
+    public function addAula($chave, Aula $aula)
     {
-        $this->aulas [] = $aula;
+        $this->aulas [$chave] = $aula;
     }
 
     public function removeAula(Aula $aula)
@@ -175,7 +231,12 @@ class Curso
 
     public function getFirstAula()
     {
-      return  $this->aulas[0];
+        $array = array_values($this->aulas);
+        return reset($array);
+    }
+public function getAulaById($id)
+    {
+      return  $this->aulas[$id];
     }
 
 

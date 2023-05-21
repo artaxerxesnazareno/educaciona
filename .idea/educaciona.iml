@@ -39,6 +39,17 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpoption/phpoption" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/graham-campbell/result-type" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ircmaxell/password-compat" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/font-awesome-4.7/css" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/font-awesome-4.7/fonts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/font-awesome-5/css" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/font-awesome-5/webfonts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fullcalendar-3.10.0/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fullcalendar-3.10.0/locale" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lightbox2/src" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lightbox2/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mdi-font/css" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mdi-font/fonts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slick/fonts" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
