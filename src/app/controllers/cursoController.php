@@ -1,12 +1,15 @@
 <?php
 
 use Artaxerxes\Educaciona\app\models\CursoDAO;
+use Artaxerxes\Educaciona\app\models\Curso;
+use Artaxerxes\Educaciona\app\models\Aula;
 require '../../../autoloader.php';
 
 
-$curso = CursoDAO::getCursosAllAula(1);
+
 session_start();
 
+//      Declarando funções da controler
 function completarAula($idAula, $idCurso){
 CursoDAO::completarAula($idAula);
 header('Location: ../../resources/views/curso.php?id='.$idCurso.'&aula='.($idAula +1));
@@ -72,9 +75,27 @@ function deletarCurso() {
         exit();
     }
 }
+function cadastrarAula()
+{
+    try {
+        $curso_id = $_POST['cursoId'];
+        $nome = $_POST['nomeAula'];
+        $link = $_POST['linkAula'];
+        $descricao = $_POST['descricaoAula'];
 
 
+        $aula = new Aula($nome, $link, $descricao);
+        CursoDAO::saveAula($aula, $curso_id);
 
+        header("Location: ../../resources/views/dashboard/index.php");
+        exit();
+    } catch (Exception $e) {
+        header("Location: ../../resources/views/dashboard/resultado.html?result=error&message=" . urlencode($e->getMessage()));
+        exit();
+    }
+}
+
+//      Chamada da função
 if (isset($_GET['aula'])) {
     completarAula($_GET['aula'], $_GET['id']);
 }
@@ -83,6 +104,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['cadastrarCurso'])) {
 }
 if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['deletarCurso'])) {
     deletarCurso();
+}
+if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['cadastrarAula'])) {
+    cadastrarAula();
 }
 
 ?>

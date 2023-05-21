@@ -187,9 +187,9 @@ static public  function getCurso($id)
         $nome = mysqli_real_escape_string($conn, $aula->getNome());
         $link = mysqli_real_escape_string($conn, $aula->getLink());
         $descricao = mysqli_real_escape_string($conn, $aula->getDescricao());
-        $completada = mysqli_real_escape_string($conn, $aula->getCompletada());
 
-        $sql = "INSERT INTO aulas (nome, link, descricao, completada, curso_id) VALUES ('$nome', '$link', '$descricao', '$completada', '$curso_id')";
+
+        $sql = "INSERT INTO aulas (nome, link, descricao, curso_id) VALUES ('$nome', '$link', '$descricao', '$curso_id')";
         $result = mysqli_query($conn, $sql);
     }
 
