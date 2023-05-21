@@ -39,7 +39,7 @@ class CursoDAO
     static public function getCursosAllAula($id)
     {
         $conn = Conexao::getInstance();
-        $sql = "select  a.id,a.completada, a.nome as aula_nome, a.link, a.descricao as aula_decricao  from cursos c join aulas a ON c.id = a.curso_id where a.curso_id = '$id'";
+        $sql = "select  a.id, a.nome as aula_nome, a.link, a.descricao as aula_decricao  from cursos c join aulas a ON c.id = a.curso_id where a.curso_id = '$id'";
 
         $result = mysqli_query($conn, $sql);
 
@@ -53,7 +53,7 @@ class CursoDAO
                 $aula = new Aula($row['aula_nome'], $row['link']);
                 $aula->setDescricao($row['aula_decricao']);
                 $aula->setId($row['id']);
-                $aula->setCompletada($row['completada']);
+
                 $curso->addAula($row['id'], $aula);
 
             }

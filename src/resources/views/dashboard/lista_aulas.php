@@ -33,16 +33,22 @@
 
     <!-- Main CSS-->
     <link href="../../css/theme.css" rel="stylesheet" media="all">
+    <link href="../../css/custon.css" rel="stylesheet" media="all">
 
 </head>
 
-<body class="animsition">
+<body class="animsition" style="animation-duration: 900ms; opacity: 1;">
 <?php
 
-use Artaxerxes\Educaciona\app\models\CursoDAO;
+
+use \Artaxerxes\Educaciona\app\models\CursoDAO;
 
 require '../../../../autoloader.php';
-    $cursos = CursoDAO::getCursosAll();
+
+
+$curso_id = $_GET['curso_id'];
+$curso = CursoDAO::getCursosAllAula($curso_id);
+$aulas = $curso->getAulas();
 ?>
 <div class="page-wrapper">
     <!-- HEADER MOBILE-->
@@ -51,7 +57,7 @@ require '../../../../autoloader.php';
             <div class="container-fluid">
                 <div class="header-mobile-inner">
                     <a class="logo" href="../../views">
-                        <img src="../../assets/images/logo.png" alt="Educaciona"/>
+                        <img src="../../assets/images/logo.png" alt="Educaciona">
                     </a>
                     <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -166,10 +172,10 @@ require '../../../../autoloader.php';
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="../../views">
-                <img src="../../assets/images/logo.png" alt="Educaciona"/>
+                <img src="../../assets/images/logo.png" alt="Educaciona">
             </a>
         </div>
-        <div class="menu-sidebar__content js-scrollbar1">
+        <div class="menu-sidebar__content js-scrollbar1 ps">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
                     <li class="has-sub">
@@ -266,6 +272,12 @@ require '../../../../autoloader.php';
                     </li>
                 </ul>
             </nav>
+            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+            </div>
+            <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+            </div>
         </div>
     </aside>
     <!-- END MENU SIDEBAR-->
@@ -279,7 +291,7 @@ require '../../../../autoloader.php';
                     <div class="header-wrap">
                         <form class="form-header" action="" method="POST">
                             <input class="au-input au-input--xl" type="text" name="search"
-                                   placeholder="Search for datas &amp; reports..."/>
+                                   placeholder="Search for datas &amp; reports...">
                             <button class="au-btn--submit" type="submit">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
@@ -295,144 +307,49 @@ require '../../../../autoloader.php';
         <div class="main-content">
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
-                    <div class="row">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">data table</h3>
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                        <div class="rs-select2--light rs-select2--md">
-                                            <select class="js-select2" name="property">
-                                                <option selected="selected">All Properties</option>
-                                                <option value="">Option 1</option>
-                                                <option value="">Option 2</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
-                                        </div>
-                                        <div class="rs-select2--light rs-select2--sm">
-                                            <select class="js-select2" name="time">
-                                                <option selected="selected">Today</option>
-                                                <option value="">3 Days</option>
-                                                <option value="">1 Week</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
-                                        </div>
-                                        <button class="au-btn-filter">
-                                            <i class="zmdi zmdi-filter-list"></i>filters
-                                        </button>
-                                    </div>
-                                    <div class="table-data__tool-right">
-                                        <a href="cadastrarCurso.html">
-                                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                                <i class="zmdi zmdi-plus"></i>add curso
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
-                                        <thead>
-                                        <tr>
+                    <!-- DATA TABLE -->
 
-                                            <th>Capa</th>
-                                            <th>Nome</th>
-                                            <th>Categoria</th>
-                                            <th>Nível</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                        // Loop através dos cursos e exibir as informações na tabela.
-                                        foreach ($cursos as $curso) {
-                                            echo '<tr class="tr-shadow">';
-
-                                            echo '<td><img src="../../assets/images/capas/' . $curso->getCapa() . '"></td>';
-                                            echo '<td>' . $curso->getNome() . '</td>';
-                                            echo '<td>' . $curso->getCategoriaNome() . '</td>';
-                                            echo '<td>' . $curso->getNivel() . '</td>';
-                                            echo '<td>';
-                                            echo '<div class="table-data-feature">';
-                                            echo '<button class="item" data-toggle="tooltip" data-placement="top" title="Send">';
-                                            echo '<i class="zmdi zmdi-mail-send"></i>';
-                                            echo '</button>';
-                                            echo '<button class="item" data-toggle="tooltip" data-placement="top" title="Edit">';
-                                            echo '<i class="zmdi zmdi-edit"></i>';
-                                            echo '</button>';
-// Botão "Ver aulas" com a URL de listar aulas do curso
-                                            echo '<a href="lista_aulas.php?curso_id=' . $curso->getId() . '" class="item" data-toggle="tooltip" data-placement="top" title="Ver aulas">';
-                                            echo '<i class="zmdi zmdi-eye"></i>';
-                                            echo '</a>';
-
-// Botão "Adicionar aula" com a URL de cadastro da aula
-                                            echo '<a href="cadastro_aula.php?curso_id=' . $curso->getId() . '" class="item" data-toggle="tooltip" data-placement="top" title="Adicionar aula">';
-                                            echo '<i class="zmdi zmdi-plus text-success"></i>';
-                                            echo '</a>';
-
-                                            // Botão "Delete" atualizado com a URL de deletar curso e cor vermelha
-                                            echo '<a href="../../../app/controllers/cursoController.php?deletarCurso&id=' . $curso->getId() . '" class="item text-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return confirm(\'Tem certeza que deseja excluir este curso?\');">';
-                                            echo '<i class="zmdi zmdi-delete text-danger"></i>';
-                                            echo '</a>';
-
-
-                                            echo '<button class="item" data-toggle="tooltip" data-placement="top" title="More">';
-                                            echo '<i class="zmdi zmdi-more"></i>';
-                                            echo '</button>';
-                                            echo '</div>';
-                                            echo '</td>';
-                                            echo '</tr>';
-                                            echo '<tr class="spacer"></tr>';
-                                        }
-                                        ?>
-                                        </tbody>
-
-
-                                </div>
-                                <!-- END DATA TABLE -->
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
-                                                href="https://colorlib.com">Colorlib</a>.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="container">
+                        <h2>Aulas de <?php echo $curso->getNome(); ?></h2>
+                        <img src="../../assets/images/capas/<?php echo $curso->getCapa(); ?>" alt="Capa do curso"
+                             width="200">
+                        <div class="table-responsive table-responsive-data2 ">
+                            <table class="table table-data2 table-striped ">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th style="width: 300px;">Link</th>
+                                    <th>Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                foreach ($aulas as $aula) {
+                                    echo '<tr>';
+                                    echo '<td>' . $aula->getNome() . '</td>';
+                                    echo '<td><div class="responsive-iframe">' . $aula->getLink() . '</div></td>';
+                                    echo '<td>';
+                                    echo '<div class="table-data-feature">';
+                                    echo '<a href="editar_aula.php?aula_id=' . $aula->getId() . '" class="item" data-toggle="tooltip" data-placement="top" title="Editar">';
+                                    echo '<i class="zmdi zmdi-edit"></i>';
+                                    echo '</a>';
+                                    echo '<a href="../../../app/controllers/cursoController.php?deletarAula&id=' . $aula->getId() . '" class="item text-danger" data-toggle="tooltip" data-placement="top" title="Deletar" onclick="return confirm(\'Tem certeza que deseja excluir esta aula?\');">';
+                                    echo '<i class="zmdi zmdi-delete text-danger"></i>';
+                                    echo '</a>';
+                                    echo '</div>';
+                                    echo '</td>';
+                                    echo '</tr>';
+                                }
+                                ?>
+                                </tbody>
+                            </table></div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
-    <!-- Jquery JS-->
-    <script src="../../../../vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="../../../../vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="../../../../vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="../../../../vendor/slick/slick.min.js">
-    </script>
-    <script src="../../../../vendor/wow/wow.min.js"></script>
-    <script src="../../../../vendor/animsition/animsition.min.js"></script>
-    <script src="../../../../vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="../../../../vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="../../../../vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="../../../../vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="../../../../vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../../../../vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="../../../../vendor/select2/select2.min.js">
-    </script>
-
-    <!-- Main JS-->
-    <script src="../../js/main1.js"></script>
-
+</div>
 </body>
 
 </html>
