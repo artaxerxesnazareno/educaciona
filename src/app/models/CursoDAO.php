@@ -102,13 +102,20 @@ class CursoDAO
 
         return $row['total_inscritos'];
     }
-
-    public static function completarAula($id)
+    public static function completarAula($id, $id_user)
     {
         $conn = Conexao::getInstance();
-        $sql = "UPDATE aulas SET completada = 1 WHERE id = $id";
-        $result = mysqli_query($conn, $sql);
-        self::getCursosAll();
+        $sql = "insert into `aulas_concluidas` ( `aula_id`, `user_id`) values ( $id, $id_user)";
+        try {
+            $result = mysqli_query($conn, $sql);
+            self::getCursosAll();
+        } catch (DatabaseException $e) {
+            // Handle the custom exception
+            echo "Caught database exception: " . $e->getMessage();
+        } catch (Exception $e) {
+            // Handle other exceptions
+            echo "Caught exception: " . $e->getMessage();
+        }
     }
 
     static public function progressoCurso($id, $id_user)
@@ -119,8 +126,8 @@ class CursoDAO
         $row1 = $result1->fetch_assoc();
         $total_aulas = $row1['total_aulas'];
 
-        $sql2 = "select count(id) as completadas from aulas where curso_id ='$id' and completada = 1";
-//        $sql2 = "select count(ac.id) as total_aulas from aulas_concluidas ac join aulas a on a.id = ac.aula_id join cursos c on c.id = a.curso_id where c.id = '$id_user'";
+        //$sql2 = "select count(id) as completadas from aulas where curso_id ='$id' and completada = 1";
+      $sql2 = "select count(ac.id) as total_aulas from aulas_concluidas ac join aulas a on a.id = ac.aula_id join cursos c on c.id = a.curso_id where c.id = '$id_user'";
         $result2 = mysqli_query($conn, $sql2);
         $row2 = $result2->fetch_assoc();
         $completadas = $row2['completadas'];
@@ -223,4 +230,14 @@ class CursoDAO
         return $result;
     }
 
+    public static function completouAula( $id_user, $aula_id)
+    {
+        $conn = Conexao::getInstance();
+        $sql = "SELECT COUNT(*) as total_aulas_concluidas FROM aulas_concluidas WHERE aula_id = $aula_id AND user_id = $id_user";
+        $result = mysqli_query($conn, $sql);
+        $row = $result->fetch_assoc();
+    
+        return $row['total_aulas_concluidas'] > 0;
+    }
+    
 }

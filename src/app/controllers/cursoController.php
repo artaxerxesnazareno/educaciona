@@ -11,7 +11,7 @@ session_start();
 
 //      Declarando funções da controler
 function completarAula($idAula, $idCurso){
-CursoDAO::completarAula($idAula);
+CursoDAO::completarAula($idAula,$_SESSION['user_id'] );
 header('Location: ../../resources/views/curso.php?id='.$idCurso.'&aula='.($idAula +1));
 }
 function cadastrarCurso(){
@@ -110,7 +110,7 @@ function deletarAula($aula_id)
 
 //      Chamada da função
 if (isset($_GET['aula'])) {
-    completarAula($_GET['aula'], $_GET['id']);
+    completarAula($_GET['aula'], $_SESSION['user_id']);
 }
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['cadastrarCurso'])) {
     cadastrarCurso();

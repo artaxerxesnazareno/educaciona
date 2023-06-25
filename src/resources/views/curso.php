@@ -8,7 +8,7 @@ use Artaxerxes\Educaciona\app\models\UserDAO;
 
 require '../../../autoloader.php';
 $id = $_GET['id'];
-
+session_start();
 $curso = CursoDAO::getCursosAllAula($id);
 if (isset($_GET['aula'])) {
     $aula_id = $_GET['aula'];
@@ -153,7 +153,8 @@ if (isset($_GET['aula'])) {
 
                                     <div class="download">';
 
-                                    if ($aula->getCompletada()) {
+
+                                    if (CursoDAO::completouAula($aula->getId(), $_SESSION['user_id'])) {
                                         echo '<i class="fa fa-check-circle" aria-hidden="true"></i>';
                                     } else {
                                         echo '<i class="fa fa-eye" ></i >';

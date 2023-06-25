@@ -68,5 +68,20 @@ class UserDAO
             }
         }
     }
+    public static function getUserName($userId)
+{
+    $conn = Conexao::getInstance();
+    //$query = "SELECT name FROM users WHERE id = $userId";
+    $sql = "select * from users where id = '$userId'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['name'];
+    } else {
+        return null;
+    }
+}
+
 
 }

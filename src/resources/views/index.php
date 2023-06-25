@@ -35,6 +35,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 use Artaxerxes\Educaciona\app\models\CursoDAO;
 require '../../../autoloader.php';
 session_start();
+
 $user_id =null;
 if (!isset($_SESSION['user_id'])) {
     header('Location: singin.php');
@@ -42,8 +43,8 @@ if (!isset($_SESSION['user_id'])) {
 }else{
     $user_id = $_SESSION['user_id'];
 }
-/*
-    $cursos = CursoDAO::getCursosAll();*/
+
+    $cursos = CursoDAO::getCursosAll();
 
 ?>
 
@@ -127,7 +128,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
                 <div class="row">
                     <?php
-                 /*   foreach($cursos as $curso) {
+                   foreach($cursos as $curso) {
                         echo '<div class="col-lg-3 col-sm-6">
                     <a href="details.php?id='.$curso->getId().'">
                     <div class="item">
@@ -140,7 +141,7 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     </a>
                   </div>';
-                    }*/
+                    }
                     ?>
 
                   

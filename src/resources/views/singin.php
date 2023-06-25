@@ -14,9 +14,13 @@
 </head>
 <body>
 <?php
-$id = $_GET['id'];
 
-if ($id == 'erro'){
+session_save_path('/var/lib/php/sessions');
+session_start();
+
+// Restante do seu código de login
+
+if (isset($_GET['id']) && $_GET['id'] == 'erro') {
     echo "<script>
            alert('Email ou Senha Incorreto!!!');
           </script>";
