@@ -296,7 +296,81 @@ require '../../../../autoloader.php';
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="row">
-
+                    <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                            <i class="fas fa-users"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>103</h2>
+                                                <span>Total de Alunos</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart1"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                            <i class="fas fa-book"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>20</h2>
+                                                <span>Total de Cursos</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart2"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                            <i class="fas fa-check-circle"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>15</h2>
+                                                <span>Total de Cursos Concluídos</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart3"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c4">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                            <i class="fas fa-user-plus"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>50</h2>
+                                                <span>Total de Inscritos nos Cursos</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart4"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
