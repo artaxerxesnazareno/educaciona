@@ -53,7 +53,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.php" class="logo">
-                        <img src="../assets/images/logo.png" alt="">
+                    <img src="../assets/images/logo.png" alt="logo Educaciona" style="width: 150px;">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Search End ***** -->

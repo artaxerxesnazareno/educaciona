@@ -69,8 +69,9 @@ if (!isset($_SESSION['user_id'])) {
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="index.html" class="logo">
-              <img src="../assets/images/logo.png" alt="logo educaciona">
-            </a>
+    <img src="../assets/images/logo.png" alt="logo Educaciona" style="width: 150px;">
+</a>
+
             <!-- ***** Logo End ***** -->
             <!-- ***** Search End ***** -->
             <div class="search-input">

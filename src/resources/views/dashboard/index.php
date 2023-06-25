@@ -51,7 +51,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="../../views">
-                            <img src="../../assets/images/logo.png" alt="Educaciona" />
+                            <img src="../../assets/images/logo.png" alt="Educaciona" style="width: 150px;" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -166,7 +166,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="../../views">
-                    <img src="../../assets/images/logo.png" alt="Educaciona" width="150px" />
+                    <img src="../../assets/images/logo.png" alt="Educaciona" style="width: 150px;" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
