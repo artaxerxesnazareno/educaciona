@@ -3,9 +3,8 @@
 namespace Artaxerxes\Educaciona\app\models;
 
 use Artaxerxes\Educaciona\config\Conexao;
-use Artaxerxes\Educaciona\utils\HashedPassword;
 
-require '../../../autoloader.php';
+
 
 class UserDAO
 {
@@ -14,7 +13,7 @@ class UserDAO
         return password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
     }
 
-    static public function saveUser(User $user)
+    public static function saveUser(User $user)
     {
 
         $conn = Conexao::getInstance();
@@ -29,7 +28,7 @@ class UserDAO
         $result = mysqli_query($conn, $query);
     }
 
-    static public function getUserByEmailAndPassword($email, $password)
+    public static function getUserByEmailAndPassword($email, $password)
     {
         $conn = Conexao::getInstance();
         $query = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
@@ -69,19 +68,27 @@ class UserDAO
         }
     }
     public static function getUserName($userId)
-{
-    $conn = Conexao::getInstance();
-    //$query = "SELECT name FROM users WHERE id = $userId";
-    $sql = "select * from users where id = '$userId'";
-    $result = mysqli_query($conn, $sql);
+    {
+        $conn = Conexao::getInstance();
+        //$query = "SELECT name FROM users WHERE id = $userId";
+        $sql = "select * from users where id = '$userId'";
+        $result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        return $row['name'];
-    } else {
-        return null;
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            return $row['name'];
+        } else {
+            return null;
+        }
     }
-}
+    public static function getTotalUsuarios()
+    {
+        $conn = Conexao::getInstance();
+        $sql = "SELECT COUNT(*) AS total_usuarios FROM users";
+        $result = mysqli_query($conn, $sql);
+        $row = $result->fetch_assoc();
 
+        return $row['total_usuarios'];
+    }
 
 }

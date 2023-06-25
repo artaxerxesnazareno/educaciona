@@ -8,7 +8,7 @@ use Artaxerxes\Educaciona\app\models\UserDAO;
 
 require '../../../autoloader.php';
 $id = $_GET['id'];
-session_start();
+
 $curso = CursoDAO::getCursosAllAula($id);
 if (isset($_GET['aula'])) {
     $aula_id = $_GET['aula'];
@@ -140,7 +140,7 @@ if (isset($_GET['aula'])) {
                     <div class="col-lg-4">
                         <div class="top-downloaded">
                             <div class="heading-section">
-                                <h4><em>Progresso</em> <?php echo $curso->getProgresso() ?>%</h4>
+                                <h4><em>Progresso</em> <?php echo $c = CursoDAO::calcularPorcentagemAulasCompletadas($curso->getId(), $_SESSION['user_id']) ?>%</h4>
                             </div>
                             <ul>
                                 <?php
