@@ -63,20 +63,6 @@ $image = imagecreatefromjpeg("../assets/images/fundo-de-papel-de-espaco-de-desig
 // Definir a opacidade (0 a 127, 0 = totalmente opaco, 127 = totalmente transparente)
 $opacity = 30;
 
-// Criar uma nova imagem com opacidade reduzida
-$transparentImage = imagecreatetruecolor($pageWidth, $pageHeight);
-imagealphablending($transparentImage, false);
-imagesavealpha($transparentImage, true);
-$transparentColor = imagecolorallocatealpha($transparentImage, 0, 0, 0, $opacity);
-imagefilledrectangle($transparentImage, 0, 0, $pageWidth, $pageHeight, $transparentColor);
-imagecopy($transparentImage, $image, 0, 0, 0, 0, $pageWidth, $pageHeight);
-
-// Salvar a imagem com opacidade reduzida
-$transparentImagePath = "../assets/images/fundo-de-papel-de-espaco-de-design-texturizado-transparente.png";
-imagepng($transparentImage, $transparentImagePath);
-
-// Adicionar a imagem transparente ao PDF
-$pdf->Image($transparentImagePath, 0, 0, $pageWidth, $pageHeight, 'PNG', '', '', false, 300, '', false, false, 1, false, false, false);
 
 // Adicione a imagem no PDF
 $pdf->Image("../assets/images/logo.png", $x, $y, $imageWidth, '', 'PNG', '', '', false, 300, '', false, false, 1, false, false, false);
