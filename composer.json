@@ -16,6 +16,7 @@
     "require": {
         "vlucas/phpdotenv": "^5.5",
         "ircmaxell/password-compat": "^1.0",
-        "dompdf/dompdf": "^2.0"
+        "dompdf/dompdf": "^2.0",
+        "tecnickcom/tcpdf": "^6.6"
     }
 }

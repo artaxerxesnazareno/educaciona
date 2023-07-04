@@ -132,15 +132,29 @@ if (isset($_GET['aula'])) {
                         </p>
                         <div class="col-lg-12 mt-5">
                             <div class="main-border-button">
-                                <a href="../../app/controllers/cursoController.php?id=<?php echo $curso->getId() ?>&aula=<?php echo $curso->getAulaById($aula_id)->getId() ?>"
-                                   class="text-center" style="width: 100%;"> Concluir aula </a>
+                                
+                            <?php
+$aulaConcluida = false; // Altere esta variável conforme necessário
+
+if ($_GET['completou'] == 1) {
+    // Botão para aula concluída
+    echo '<a href="#" onclick="confirmarDownload()" class="text-center" style="width: 100%;"> Certificado do Curso </a>';
+} else {
+    // Botão para concluir aula
+    echo '<a href="../../app/controllers/cursoController.php?id=' . $curso->getId() . '&aula=' . $curso->getAulaById($aula_id)->getId() . '" class="text-center" style="width: 100%;"> Concluir aula </a>';
+}
+
+
+?>
+
+                                   
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="top-downloaded">
                             <div class="heading-section">
-                                <h4><em>Progresso</em> <?php echo $c = CursoDAO::calcularPorcentagemAulasCompletadas($curso->getId(), $_SESSION['user_id']) ?>%</h4>
+                                <h4><em>Progresso</em> <?php echo $c = CursoDAO::calcularPorcentagemAulasCompletadas( $_SESSION['user_id'],$curso->getId()) ?>%</h4>
                             </div>
                             <ul>
                                 <?php
@@ -190,6 +204,16 @@ if (isset($_GET['aula'])) {
         </div>
     </div>
 </footer>
+<script type="text/javascript">
+
+function confirmarDownload() {
+    var confirmacao = window.confirm("Gostaria de baixar o certificado?");
+    if (confirmacao) {
+        window.location.href = "certificado.php?id=" + <?php echo $curso->getId() ?> + "&aula=" + <?php echo $curso->getAulaById($aula_id)->getId() ?>;
+    }
+}
+
+</script>
 
 
 <!-- Scripts -->

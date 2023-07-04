@@ -6,13 +6,12 @@ use Artaxerxes\Educaciona\app\models\CursoDAO;
 
 //$firstClass = CursoDAO::getCursosAllAula(2);
 $curso = CursoDAO::getCursosAll();
-$progresso = CursoDAO::calcularPorcentagemAulasCompletadas(5,5);
+$progresso = CursoDAO::calcularPorcentagemAulasCompletadas(5,3);
 
 //$cursos_ = CursoDAO::getCursosByUserId(5);
 echo "<h1></br>Var_export</h1>";
 echo '<pre>';
 var_export($progresso);
-echo CursoDAO::progressoCurso(5, 5);
 echo '</pre>';
 
 //

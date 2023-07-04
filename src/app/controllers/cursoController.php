@@ -1,20 +1,25 @@
 <?php
 
-use Artaxerxes\Educaciona\app\models\CursoDAO;
-use Artaxerxes\Educaciona\app\models\Curso;
 use Artaxerxes\Educaciona\app\models\Aula;
+use Artaxerxes\Educaciona\app\models\Curso;
+use Artaxerxes\Educaciona\app\models\CursoDAO;
 require '../../../autoloader.php';
-
-
 
 session_start();
 
 //      Declarando funções da controler
-function completarAula($idAula, $idCurso){
-CursoDAO::completarAula($idAula,$_SESSION['user_id'] );
-header('Location: ../../resources/views/curso.php?id='.$idCurso.'&aula='.($idAula +1));
+function completarAula($idAula, $idCurso)
+{
+    CursoDAO::completarAula($idAula, $_SESSION['user_id']);
+    if (CursoDAO::usuarioCompletouCurso($_SESSION['user_id'], $idCurso)) {
+        header('Location: ../../resources/views/curso.php?id=' . $idCurso . '&aula=' . $idAula . '&completou=1' );
+
+    } else {
+        header('Location: ../../resources/views/curso.php?id=' . $idCurso . '&aula=' . ($idAula + 1));
+    }
 }
-function cadastrarCurso(){
+function cadastrarCurso()
+{
     try {
         if (isset($_FILES['capaCurso']) && $_FILES['capaCurso']['error'] == 0) {
             $allowed_extensions = array('png', 'jpeg', 'jpg');
@@ -37,7 +42,6 @@ function cadastrarCurso(){
                     $curso->setCapa($new_file_name);
                     CursoDAO::saveCurso($curso);
 
-
 //                    header("Location: ../../resources/views/dashboard/resultado.html?result=success");
                     header("Location: ../../resources/views/dashboard/index.php");
                     exit();
@@ -55,7 +59,8 @@ function cadastrarCurso(){
         exit();
     }
 }
-function deletarCurso() {
+function deletarCurso()
+{
     try {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -83,7 +88,6 @@ function cadastrarAula()
         $link = $_POST['linkAula'];
         $descricao = $_POST['descricaoAula'];
 
-
         $aula = new Aula($nome, $link, $descricao);
         CursoDAO::saveAula($aula, $curso_id);
 
@@ -107,10 +111,9 @@ function deletarAula($aula_id)
     }
 }
 
-
 //      Chamada da função
 if (isset($_GET['aula'])) {
-    completarAula($_GET['aula'], $_SESSION['user_id']);
+    completarAula($_GET['aula'], $_GET['id']);
 }
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['cadastrarCurso'])) {
     cadastrarCurso();
@@ -124,5 +127,3 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['cadastrarAula'])) {
 if (isset($_GET['deletarAula'])) {
     deletarAula($_GET['deletarAula']);
 }
-
-?>
